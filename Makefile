@@ -1,6 +1,7 @@
 mypweave = /Users/chabot/Library/Enthought/Canopy_64bit/User/bin/Pweave
 mylatexmk = /usr/texbin/latexmk
 output = 2014-08-29-euroscipy-pambox-poster.pdf
+proc = texminted
 
 
 DOT_OUTDIR := figures
@@ -35,3 +36,5 @@ withcache: dotfiles
 cache: $(output:.pdf=.texw)
 	$(mypweave) --cache-results -f $(proc) $(output:.pdf=.texw)
 
+clean:
+	$(mylatexmk) -C 
