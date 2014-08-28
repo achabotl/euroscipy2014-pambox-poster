@@ -23,15 +23,15 @@ $(DOT_OUTDIR):
 
 # Make article
 %.pdf: %.texw dotfiles
-	$(mypweave) -c -f tex $(<)
-	$(mylatexmk) -pdf -pv $(<:.texw=.tex)
+	$(mypweave) -c -f $(proc) $(<)
+	$(mylatexmk) -pdf -pv -silent $(<:.texw=.tex)
 
 # Use cached python blocks
 withcache: dotfiles 
-	$(mypweave) -d -f tex $(output:.pdf=.texw)
-	$(mylatexmk) -pdf -pv $(output:.pdf=.tex)
+	$(mypweave) -d -f $(texpweave) $(output:.pdf=.texw)
+	$(mylatexmk) -pdf -pv -silent $(output:.pdf=.tex)
 
 # Cache the output of the python blocks
 cache: $(output:.pdf=.texw)
-	$(mypweave) --cache-results -f tex $(output:.pdf=.texw)
+	$(mypweave) --cache-results -f $(proc) $(output:.pdf=.texw)
 
