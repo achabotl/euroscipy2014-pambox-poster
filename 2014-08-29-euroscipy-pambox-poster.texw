@@ -13,7 +13,7 @@
 %  GNU General Public License for more details.
 %
 %  You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
-\documentclass[a0paper, portrait,fontscale=0.35]{baposter}
+\documentclass[a0paper, portrait]{baposter}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Language, Encoding and Fonts
 % http://en.wikibooks.org/wiki/LaTeX/Internationalization
@@ -35,14 +35,19 @@
 \usepackage[english]{babel}
 % Use the vector font Latin Modern which is going
 % to be the default font in latex in the future.
-\usepackage{helvet}
+\usepackage{sourcesanspro}
 % Change the default font family from roman to sans serif
 \renewcommand{\familydefault}{\sfdefault} % for text
 \usepackage[helvet]{sfmath} % for math
 % Choose the font encoding
 \usepackage[T1]{fontenc}
+% \usepackage[ttdefault=true]{AnonymousPro}
+\usepackage{inconsolata}
 \usepackage[]{natbib}
 \setlength{\bibsep}{0pt plus 0.3ex}
+\usepackage{listings}
+\usepackage{minted}
+\usepackage{graphviz}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Graphics and Tables
@@ -56,8 +61,8 @@
 % Set up how figure and table captions are displayed
 \usepackage{caption}
 \captionsetup{
-  font=small,% set font size to footnotesize
-  labelfont=bf % bold label (e.g., Figure 3.2) font
+font=small,% set font size to footnotesize
+labelfont=bf % bold label (e.g., Figure 3.2) font
 }
 % Make the standard latex tables look so much better
 \usepackage{array,booktabs}
@@ -96,11 +101,11 @@
 \usepackage{enumitem}
 %configure itemize
 \setlist{%
-  topsep=0pt,% set space before and after list
-  noitemsep,% remove space between items
-  labelindent=\parindent,% set the label indentation to the paragraph indentation
-  leftmargin=*,% remove the left margin
-  font=\color{dtured}\normalfont, %set the colour of all bullets, numbers and descriptions to dtured
+topsep=0pt,% set space before and after list
+noitemsep,% remove space between items
+labelindent=\parindent,% set the label indentation to the paragraph indentation
+leftmargin=*,% remove the left margin
+font=\color{dtured}\normalfont, %set the colour of all bullets, numbers and descriptions to dtured
 }
 % use set<itemize,enumerate,description> if you have an older latex distribution
 \setitemize[1]{label={\raise1.25pt\hbox{$\blacktriangleright$}}}
@@ -129,10 +134,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % change/remove some names
 \addto{\captionsenglish}{
-  %remove the title of the bibliograhpy
-  \renewcommand{\refname}{\vspace{-0.7em}}
-  %change Figure to Fig. in figure captions
-  \renewcommand{\figurename}{Fig.}
+%remove the title of the bibliograhpy
+\renewcommand{\refname}{\vspace{-0.7em}}
+%change Figure to Fig. in figure captions
+\renewcommand{\figurename}{Fig.}
 }
 % create links
 \usepackage{url}
@@ -144,6 +149,17 @@
 % the text width is the same for the normal single column and the column
 % inside the multicol environment.
 \setlength{\columnsep}{2em}
+\usepackage{listings}
+\lstset{ %
+% backgroundcolor=\color{white},   % choose the background color
+% basicstyle=\footnotesize,        % size of fonts used for the code
+% breaklines=true,                 % automatic line breaking only at whitespace
+% captionpos=b,                    % sets the caption-position to bottom
+% commentstyle=\color{mygreen},    % comment style
+% escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+% keywordstyle=\color{blue},       % keyword style
+% stringstyle=\color{mymauve},     % string literal style
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Macros
@@ -164,12 +180,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % set the background of the poster
 \background{
-  \begin{tikzpicture}[remember picture,overlay]%
-    %the poster background color
-    \fill[fill=white] (current page.north west) rectangle (current page.south east);
-    %the header
-    \fill [fill=dtured] (current page.north west) rectangle ([yshift=-\headerheight] current page.north east);
-  \end{tikzpicture}
+\begin{tikzpicture}[remember picture,overlay]%
+%the poster background color
+\fill[fill=white] (current page.north west) rectangle (current page.south east);
+%the header
+\fill [fill=dtured] (current page.north west) rectangle ([yshift=-\headerheight] current page.north east);
+\end{tikzpicture}
 }
 % if you want to reduce the space before and after equations, use and adjust
 % the following lines
@@ -180,51 +196,53 @@
 % General poster setup
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{poster}{
-  %general options for the poster
-  grid=false,
-  columns=3,
+%general options for the poster
+grid=false,
+columns=3,
 %  colspacing=4.2mm,
-  headerheight=0.1\textheight,
-  background=user,
+headerheight=0.1\textheight,
+background=user,
 %  bgColorOne=red!42, %is used when background != user and none
 %  bgColortwo=green!42, %is used when background is shaded
-  eyecatcher=true,
-  %posterbox options
-  headerborder=open,
-  borderColor=dtured,
-  headershape=roundedright,
-  headershade=plain,
-  headerColorOne=white,
+eyecatcher=true,
+%posterbox options
+headerborder=open,
+borderColor=dtured,
+headershape=roundedright,
+headershade=plain,
+headerColorOne=white,
 %  headerColortwo=yellow!42, %is used when the header background is shaded
-  textborder=none,
-  boxshade=plain,
-  boxColorOne=white,
+textborder=none,
+boxshade=plain,
+boxColorOne=white,
 %  boxColorTwo=cyan!42,%is used when the text background is shaded
-  headerFontColor=dtured,
-  headerfont=\Large\sf\bf,
-  linewidth=1pt
+headerFontColor=dtured,
+headerfont=\Large\sf\bf,
+linewidth=1pt
 }
 %the Eye Catcher (the logo on the left)
 {
-  %this can be commented out or replaced by a company/department logo
-  \includegraphics[height=0.75\headerheight]{figures/CAHR-logo-white}
+%this can be commented out or replaced by a company/department logo
+\includegraphics[height=0.75\headerheight]{figures/CAHR-logo-white}
 }
 %the poster title
 {\color{white}\Huge\bf
-    PAMBOX: A Python auditory modeling toolbox
+PAMBOX: A Python auditory modeling toolbox
 }
 %the author(s)
 {\color{white}
-  \vspace{0.5em} Alexandre Chabot-Leclerc  ---
-  \includegraphics[height=0.4cm]{figures/Twitter_logo_white.eps}
-  @AlexChabotL\\[0.5em]
-  Centre for Applied Hearing Research, Technical University of Denmark,\\
-  alech@elektro.dtu.dk
+\vspace{0.25em} Alexandre Chabot-Leclerc\\[0.25em]
+Centre for Applied Hearing Research, Technical University of Denmark\\
+{\small 
+  \includegraphics[height=0.25cm]{figures/Twitter_logo_white.eps} @AlexChabotL~~
+  \includegraphics[height=0.75em]{figures/white-email-envelope-hi_trans.png} pambox@alexchabot.net~~
+  http://pambox.org}
+
 }
 %the logo (the logo on the right)
 {
-  %this can be commented out or replaced by a company/department logo
-  \includegraphics[height=0.5\headerheight]{figures/DTU_logo_white.pdf}
+%this can be commented out or replaced by a company/department logo
+\includegraphics[height=0.5\headerheight]{figures/DTU_logo_white.pdf}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -232,44 +250,130 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{posterbox}[name=goals,column=0,row=0]{Goals}
-
-\end{posterbox}
-
-\begin{posterbox}[name=background,column=0,below=goals]{Background}
-\end{posterbox}
-
-
-\begin{posterbox}[name=models,column=0,below=background]{Models}
-
-\end{posterbox}
-
-
-\begin{posterbox}[name=stimuli,column=0,below=models,above=bottom]{Stimuli and conditions}
-
+\vspace{1em}
+\begin{itemize}
+    \item Collect published models of auditory processing.
+    \item Focus on standardizing the interface of models that perform similar tasks, to simplify comparisons across models.
+    \item Components should be reusable and easy to inspect and modify. 
+\end{itemize}
+\vspace{1em}
 \end{posterbox}
 
 
-\begin{posterbox}[name=results,span=2,column=1,row=0]{Results}
-
+\begin{posterbox}[name=problems,column=0,row=0,below=goals]{Problems and inspiration}
+\vspace{1em}
+\begin{itemize}
+    \item Intelligibility prediction work often involves comparisons against other models, but the source code is rarely available. Additionally, reference levels and interfaces are often completely different.
+    \item \texttt{scikit-learn}'s approach of providing a \emph{consistent} interface for all methods is a strong inspiration.
+    \item The Auditory Modeling Toolbox \citep{amt} is a similar attempt, in Matlab, at collecting published auditory models. Although component are well tested, they are hard to reuse.
+\end{itemize}    
 \end{posterbox}
 
 
-\begin{posterbox}[name=figures,column=1,below=results,above=bottom]{Discussion}
-
+\begin{posterbox}[name=components,column=1,span=2,row=0]{PAMBOX's structure}
+\includegraphics[width=\textwidth]{figures/model_structure_with_anatomy.pdf}
 \end{posterbox}
 
-\begin{posterbox}[name=conclusions,column=2,below=results]{Conclusions and future plans}
- 
+\begin{posterbox}[name=intelligibility,span=2,column=0,row=0,below=components]{Predicting speech intelligibility}
+\begin{minipage}[t]{0.4\textwidth-1em}
+\vspace{1em}
+Predicting speech intelligibility consists of predicting how well speech is understood in a given situation. Intelligibility experiments tend to have similar structures and components, as illustrated below. 
+    \begin{center}
+        \includegraphics[width=\textwidth]{figures/experiment_structure.pdf}
+        \captionof{figure}{Elements of a speech intelligibility prediction experiment.}
+    \end{center}
+\texttt{pambox} provides an interface to run an experiment with an arbitrary number of models, SNRs, and distortion parameters. Each experiment is considered to have a single speech material and a single ``distortion'', although that could be extended.
+
+The preprocessing stage can easily be modified or replaced by overriding the \texttt{preprocessing} method of the \texttt{Experiment} class.
+This allows, for example, to apply the level adjustments before the distortion, or to apply processing to both the target and the maskers.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.6\textwidth-1em}
+\vspace{1em}
+Below is an example of a complete speech intelligibility prediction experiment. 
+Two models are compared, in a condition with a speech-shaped noise masker.
+% \begin{lstlisting}[language=Python,
+% basicstyle=\scriptsize\ttfamily,
+% numbers=left,
+% numberstyle=\tiny\color{gray},
+% keywordstyle=\bfseries]
+
+<<exp_setup, echo=False>>=
+import seaborn as sns
+sns.set_context('poster')
+@
+
+<<exp,echo=True, fig=True,include=False,width='\linewidth'>>=
+from pambox.central import IdealObs
+from pambox.speech import Sepsm, MrSepsm, Material, \
+    Experiment
+    
+# Define models and "experimental setup".
+models = [Sepsm(), MrSepsm()]
+material = Material(
+    root_path='stimuli', 
+    path_to_sentences='sentences', 
+    path_to_ssn='ssn.wav')
+snrs = range(-9, 4, 2)
+
+# Run experiment, transform outputs, and plot results.
+exp = Experiment(models, material, snrs)
+df = exp.run()
+obs = IdealObs()
+df = exp.pred_to_pc(df, obs.snrenv_to_pc)
+exp.plot_results(df)
+@
+% \end{lstlisting}
+
+\begin{center}
+<<plot_exp, echo=False, fig=True, include=True, width='\linewidth'>>=
+exp.plot_results(df)
+@    
+\captionof{figure}{Predicted speech intelligibility as a function of the SNR for two models, the sEPSM and the mr-sEPSM.}
+\end{center}
+\end{minipage}
 \end{posterbox}
 
-\begin{posterbox}[name=ack,column=2,below=conclusions]{Acknowledgements}
-    This research was supported in part by the National Science and Engineering Research Council of Canada (NSERC), Phonak, and the Technical University of Denmark.
+
+\begin{posterbox}[name=development,column=2,below=components]{Development}
+\vspace{1em}
+\begin{itemize}
+    \item Depends on the usual suspects: \texttt{numpy}, \texttt{scipy}, \texttt{pandas} and \texttt{matplotlib} and with \texttt{pyaudio} as an optional dependency.
+    \item Licensed under the 3-Clause BSD license.
+    \item Docs at \texttt{http://docs.pambox.org}, thanks to ReadTheDocs!
+    \item Hosted on Github.
+\end{itemize}
+\vspace{1em}
 \end{posterbox}
 
-\begin{posterbox}[name=refs,column=2,below=ack,above=bottom]{References}
-    \scriptsize
-    \bibliographystyle{jasaauthyear}
-    % \bibliography{extracted}
+\begin{posterbox}[name=discussion,column=2,below=development]{Conclusions}
+\vspace{1em}
+\begin{itemize}
+    \item \texttt{pambox} is still in its infancy. 
+Very few auditory models are currently written in Python; it would require a considerable effort to reimplement existing models.
+    \item However, implementation of models whose code was not released would be a great help.
+    \item \texttt{pambox} needs contributions of models stages and complete models.
+\end{itemize}
+\begin{center}
+    \vspace{0.5em}
+    {\huge \texttt{http://pambox.org}}
+    \vspace{1em}
+\end{center}
+\end{posterbox}
+
+
+\begin{posterbox}[name=ack,column=2,below=discussion]{Acknowledgements}
+\vspace{1em}
+This research was supported in part by the National Science and Engineering Research Council of Canada (NSERC), Phonak, and the Technical University of Denmark.
+\vspace{1em}
+\end{posterbox}
+
+
+\begin{posterbox}[name=refs,column=2,span=1,below=ack]{References}
+\scriptsize
+\bibliographystyle{jasaauthyear}
+\bibliography{refs}
+% Figure for pathway: http://what-when-how.com/neuroscience/auditory-and-vestibular-systems-sensory-system-part-2/
+% Anatomy of the human ear: Chittka L, Brockmann A - Perception Space—The Final Frontier, A PLoS Biology Vol. 3, No. 4, e137 doi:10.1371/journal.pbio.0030137 (Fig. 1A/Large version), vectorised by Inductiveload
 \end{posterbox}
 
 \end{poster}
