@@ -365,9 +365,10 @@ Very few auditory models are currently written in Python; it would require a con
 
 
 \begin{posterbox}[name=ack,column=2,below=discussion]{Acknowledgements}
-\vspace{1em}
+\small
+% \vspace{1em}
 This research was supported in part by the National Science and Engineering Research Council of Canada (NSERC), Phonak, and the Technical University of Denmark.
-\vspace{1em}
+% \vspace{1em}
 \end{posterbox}
 
 
@@ -375,8 +376,16 @@ This research was supported in part by the National Science and Engineering Rese
 \scriptsize
 \bibliographystyle{jasaauthyear}
 \bibliography{refs}
+% Ear figure modified based on ``Anatomy of the Human Ea'' by Chittka L, Brockmann A - Perception Space—The Final Frontier, A PLoS Biology Vol. 3, No. 4, e137 doi:10.1371/journal.pbio.0030137 (Fig. 1A/Large version), vectorised by Inductiveload. Licensed under Creative Commons Attribution 2.5 via Wikimedia Commons
 % Figure for pathway: http://what-when-how.com/neuroscience/auditory-and-vestibular-systems-sensory-system-part-2/
 % Anatomy of the human ear: Chittka L, Brockmann A - Perception Space—The Final Frontier, A PLoS Biology Vol. 3, No. 4, e137 doi:10.1371/journal.pbio.0030137 (Fig. 1A/Large version), vectorised by Inductiveload
+\begin{minipage}[c]{0.7\colwidth-1em}
+This work is licensed under Creative Commons Attribution-NonCommercial 4.0 International
+\end{minipage}
+\begin{minipage}[c]{0.3\colwidth-1em}
+    \flushright
+\includegraphics[height=0.7cm]{figures/by-nc.eps}    
+\end{minipage}
 \end{posterbox}
 
 \end{poster}
