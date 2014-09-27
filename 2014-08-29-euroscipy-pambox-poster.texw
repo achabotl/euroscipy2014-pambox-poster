@@ -253,8 +253,9 @@ Centre for Applied Hearing Research, Technical University of Denmark\\
 \vspace{1em}
 \begin{itemize}
     \item Collect published models of auditory processing.
-    \item Focus on standardizing the interface of models that perform similar tasks, to simplify comparisons across models.
-    \item Components should be reusable and easy to inspect and modify. 
+    \item Simplify comparisons across models by standardizing the interface for
+models that perform similar tasks.
+    \item Make components reusable and easy to inspect and modify. 
 \end{itemize}
 \vspace{1em}
 \end{posterbox}
@@ -263,26 +264,28 @@ Centre for Applied Hearing Research, Technical University of Denmark\\
 \begin{posterbox}[name=problems,column=0,row=0,below=goals]{Problems and inspiration}
 \vspace{1em}
 \begin{itemize}
-    \item Intelligibility prediction work often involves comparisons against other models, but the source code is rarely available. Additionally, reference levels and interfaces are often completely different.
+    \item Intelligibility prediction work often involves comparisons across models, but the source code is rarely available. Additionally,
+reference levels and interfaces are often completely different.
     \item \texttt{scikit-learn}'s approach of providing a \emph{consistent} interface for all methods is a strong inspiration.
-    \item The Auditory Modeling Toolbox \citep{amt} is a similar attempt, in Matlab, at collecting published auditory models. Although component are well tested, they are hard to reuse.
+    \item The Auditory Modeling Toolbox \citep{amt} is a similar attempt at collecting published auditory models, made for Matlab. Although component are well tested, they are hard to reuse.
 \end{itemize}    
 \end{posterbox}
 
 
 \begin{posterbox}[name=components,column=1,span=2,row=0]{PAMBOX's structure}
 \includegraphics[width=\textwidth]{figures/model_structure_with_anatomy.pdf}
+\nocite{ear}
 \end{posterbox}
 
 \begin{posterbox}[name=intelligibility,span=2,column=0,row=0,below=components]{Predicting speech intelligibility}
 \begin{minipage}[t]{0.4\textwidth-1em}
 \vspace{1em}
-Predicting speech intelligibility consists of predicting how well speech is understood in a given situation. Intelligibility experiments tend to have similar structures and components, as illustrated below. 
+Predicting speech intelligibility consists of predicting how well speech is understood in a given situation. Intelligibility experiments tend to have similar components, as illustrated below. 
     \begin{center}
         \includegraphics[width=\textwidth]{figures/experiment_structure.pdf}
         \captionof{figure}{Elements of a speech intelligibility prediction experiment.}
     \end{center}
-\texttt{pambox} provides an interface to run an experiment with an arbitrary number of models, SNRs, and distortion parameters. Each experiment is considered to have a single speech material and a single ``distortion'', although that could be extended.
+\texttt{pambox} provides an interface to run experiments with an arbitrary number of models, SNRs, and distortion parameters. Currently, each experiment is treated as having a single speech material and a single ``distortion'', although that could be extended.
 
 The preprocessing stage can easily be modified or replaced by overriding the \texttt{preprocessing} method of the \texttt{Experiment} class.
 This allows, for example, to apply the level adjustments before the distortion, or to apply processing to both the target and the maskers.
